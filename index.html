@@ -8,7 +8,6 @@
 <title>I'm Sorry ❤️</title>
 
 <style>
-
 body{
 margin:0;
 font-family:'Segoe UI', sans-serif;
@@ -19,8 +18,6 @@ align-items:center;
 height:100vh;
 text-align:center;
 overflow:hidden;
-
-/* animated gradient background */
 background:linear-gradient(-45deg,#ff758c,#ff7eb3,#ff9a9e,#fad0c4);
 background-size:400% 400%;
 animation:bgmove 12s ease infinite;
@@ -43,7 +40,6 @@ box-shadow:0 10px 40px rgba(0,0,0,0.3);
 position:relative;
 }
 
-/* slides */
 .slide{
 display:none;
 animation:fade 0.8s;
@@ -56,16 +52,9 @@ from{opacity:0; transform:translateY(20px);}
 to{opacity:1; transform:translateY(0);}
 }
 
-h1{
-font-size:38px;
-}
+h1{font-size:38px;}
+p{font-size:20px;margin-top:15px;}
 
-p{
-font-size:20px;
-margin-top:15px;
-}
-
-/* buttons */
 button{
 padding:15px 35px;
 font-size:18px;
@@ -83,7 +72,6 @@ transform:scale(1.1);
 box-shadow:0 5px 20px rgba(0,0,0,0.3);
 }
 
-/* image slider */
 img{
 width:260px;
 border-radius:15px;
@@ -103,7 +91,7 @@ padding:10px;
 display:none;
 }
 
-/* SORRY RAIN */
+/* Sorry rain */
 .sorry{
 position:absolute;
 top:-50px;
@@ -112,17 +100,15 @@ animation:fall linear forwards;
 opacity:0.8;
 }
 @keyframes fall{
-to{
-transform:translateY(110vh);
+to{transform:translateY(110vh);}
 }
-}
-
 </style>
 
 </head>
 <body>
 
-<audio autoplay loop>
+<!-- Background music (do NOT autoplay) -->
+<audio id="bgMusic" loop>
 <source src="music.mp3" type="audio/mpeg">
 </audio>
 
@@ -131,13 +117,13 @@ transform:translateY(110vh);
 <!-- Slide 1 -->
 <div class="slide active" id="slide1">
 <h1 id="typing"></h1>
-<button onclick="next()">Continue</button>
+<button onclick="startMusic()">Continue</button>
 </div>
 
 <!-- Slide 2 -->
 <div class="slide" id="slide2">
 <h1>I want to show you something</h1>
-<p>Some moments that still mean everything to me.</p>
+<p>yk Some moments that still mean everything to me .</p>
 <button onclick="next()">See Memories</button>
 </div>
 
@@ -171,15 +157,14 @@ transform:translateY(110vh);
 <!-- Slide 6: Final Forgive Slide -->
 <div class="slide" id="slide6">
 <h1>Please forgive me ❤️</h1>
-<p>I promise ar hobe na emon <3.</p>
+<p>I promise Ar Hobe Na Emon <3.</p>
 <button onclick="forgive()">Forgive Me</button>
 </div>
 
 </div>
 
 <script>
-
-/* typing animation */
+/* Typing animation */
 let text="Before you close this page... please read this ❤️";
 let i=0;
 function type(){
@@ -191,7 +176,7 @@ setTimeout(type,50);
 }
 type();
 
-/* slide system */
+/* Slide system */
 let current=1;
 function next(){
 document.getElementById("slide"+current).classList.remove("active");
@@ -199,12 +184,12 @@ current++;
 document.getElementById("slide"+current).classList.add("active");
 }
 
-/* forgive ending */
+/* Forgive ending */
 function forgive(){
 document.body.innerHTML="<h1 style='font-size:60px'>Thank you for giving me another chance ❤️</h1><p>I promise I'll try to be better.</p>";
 }
 
-/* SORRY RAIN EFFECT */
+/* Sorry Rain */
 const fonts=["serif","monospace","cursive","fantasy","sans-serif"];
 function createSorry(){
 let s=document.createElement("div");
@@ -218,15 +203,20 @@ s.style.animationDuration=(6+Math.random()*5)+"s";
 document.body.appendChild(s);
 setTimeout(()=>{s.remove();},10000);
 }
-
 /* Medium-density Sorry rain on Slide 5 */
 setInterval(()=>{ 
 if(current===5) { createSorry(); createSorry(); } 
 },800);
 
+/* Start music after first click */
+function startMusic(){
+document.getElementById('bgMusic').play();
+next();
+}
 </script>
 
 </body>
 </html>
+
 
 
