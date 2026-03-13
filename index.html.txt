@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>I'm Sorry ❤️</title>
+
+<style>
+
+body{
+margin:0;
+font-family:'Segoe UI', sans-serif;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+overflow:hidden;
+
+/* animated gradient background */
+background:linear-gradient(-45deg,#ff758c,#ff7eb3,#ff9a9e,#fad0c4);
+background-size:400% 400%;
+animation:bgmove 12s ease infinite;
+}
+
+@keyframes bgmove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.container{
+width:90%;
+max-width:700px;
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(12px);
+border-radius:20px;
+padding:40px;
+box-shadow:0 10px 40px rgba(0,0,0,0.3);
+position:relative;
+}
+
+/* slides */
+.slide{
+display:none;
+animation:fade 0.8s;
+}
+.active{
+display:block;
+}
+@keyframes fade{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+h1{
+font-size:38px;
+}
+
+p{
+font-size:20px;
+margin-top:15px;
+}
+
+/* buttons */
+button{
+padding:15px 35px;
+font-size:18px;
+border:none;
+border-radius:30px;
+cursor:pointer;
+background:white;
+color:#ff4d6d;
+margin-top:30px;
+transition:0.3s;
+font-weight:bold;
+}
+button:hover{
+transform:scale(1.1);
+box-shadow:0 5px 20px rgba(0,0,0,0.3);
+}
+
+/* image slider */
+img{
+width:260px;
+border-radius:15px;
+margin:10px;
+transition:0.3s;
+}
+img:hover{
+transform:scale(1.05);
+}
+.slider{
+display:flex;
+overflow-x:auto;
+justify-content:center;
+padding:10px;
+}
+.slider::-webkit-scrollbar{
+display:none;
+}
+
+/* SORRY RAIN */
+.sorry{
+position:absolute;
+top:-50px;
+color:white;
+animation:fall linear forwards;
+opacity:0.8;
+}
+@keyframes fall{
+to{
+transform:translateY(110vh);
+}
+}
+
+</style>
+
+</head>
+<body>
+
+<audio autoplay loop>
+<source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+<!-- Slide 1 -->
+<div class="slide active" id="slide1">
+<h1 id="typing"></h1>
+<button onclick="next()">Continue</button>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide" id="slide2">
+<h1>I want to show you something</h1>
+<p>Some moments that still mean everything to me.</p>
+<button onclick="next()">See Memories</button>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide" id="slide3">
+<h1>Our Memories</h1>
+<div class="slider">
+<img src="pic1.jpg">
+<img src="pic2.jpg">
+<img src="pic3.jpg">
+</div>
+<p>These moments will always be special to me.</p>
+<button onclick="next()">Next</button>
+</div>
+
+<!-- Slide 4 -->
+<div class="slide" id="slide4">
+<h1>I made a mistake</h1>
+<p>I know I hurt you and I'm truly sorry.</p>
+<p>You mean so much to me and I regret what happened.</p>
+<button onclick="next()">Next</button>
+</div>
+
+<!-- Slide 5: Sorry Rain -->
+<div class="slide" id="slide5">
+<h1>I'm Really Sorry...</h1>
+<p>More sorry than these words can show.</p>
+<button onclick="next()">Continue</button>
+</div>
+
+<!-- Slide 6: Final Forgive Slide -->
+<div class="slide" id="slide6">
+<h1>Please forgive me ❤️</h1>
+<p>I promise ar hobe na emon <3.</p>
+<button onclick="forgive()">Forgive Me</button>
+</div>
+
+</div>
+
+<script>
+
+/* typing animation */
+let text="Before you close this page... please read this ❤️";
+let i=0;
+function type(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text.charAt(i);
+i++;
+setTimeout(type,50);
+}
+}
+type();
+
+/* slide system */
+let current=1;
+function next(){
+document.getElementById("slide"+current).classList.remove("active");
+current++;
+document.getElementById("slide"+current).classList.add("active");
+}
+
+/* forgive ending */
+function forgive(){
+document.body.innerHTML="<h1 style='font-size:60px'>Thank you for giving me another chance ❤️</h1><p>I promise I'll try to be better.</p>";
+}
+
+/* SORRY RAIN EFFECT */
+const fonts=["serif","monospace","cursive","fantasy","sans-serif"];
+function createSorry(){
+let s=document.createElement("div");
+s.className="sorry";
+s.innerText="Sorry";
+s.style.left=Math.random()*100+"vw";
+s.style.fontSize=(18+Math.random()*20)+"px";
+s.style.fontFamily=fonts[Math.floor(Math.random()*fonts.length)];
+s.style.opacity = 0.7 + Math.random()*0.2;
+s.style.animationDuration=(6+Math.random()*5)+"s";
+document.body.appendChild(s);
+setTimeout(()=>{s.remove();},10000);
+}
+
+/* Medium-density Sorry rain on Slide 5 */
+setInterval(()=>{ 
+if(current===5) { createSorry(); createSorry(); } 
+},800);
+
+</script>
+
+</body>
+</html>
+
